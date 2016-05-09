@@ -6,11 +6,14 @@
         xmlns:local="clr-namespace:IPLogParser"
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
-    <Grid Cursor="{Binding stupidString, Mode=OneWay}">
-        <Grid.DataContext>
-            <local:TheLog/>
-        </Grid.DataContext>
+    <Window.DataContext>
+        <local:TheLog/>
+    </Window.DataContext>
+    <Grid>
+        <ScrollViewer>
+            <TextBox Text="{Binding stupidString, Mode=OneWay}" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True" />
+        </ScrollViewer>
+
         <!--<ListView />-->
-        <TextBlock></TextBlock>
     </Grid>
 </Window>

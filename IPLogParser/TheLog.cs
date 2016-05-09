@@ -13,7 +13,13 @@ namespace IPLogParser
         public ObservableCollection<LogEntry> LogList { get; private set; }
         public string stupidString { get; private set; }
 
-        public bool readFromFile(string filename)
+        public TheLog()
+        {
+            stupidString = "Hello";
+            this.readFromFile("C:\\Users\\Steve\\Source\\Repos\\IPLogParser\\IPLogParser\\Data\\inpatient_testrun_20160504_5.log");
+        }
+
+        public async void readFromFile(string filename)
         {
             stupidString = "";
             try
@@ -22,20 +28,19 @@ namespace IPLogParser
                 {
                     while(!sr.EndOfStream)
                     {
-                        String line = sr.ReadLine();
+                        String line = await sr.ReadLineAsync();
                         stupidString += line;
+                        stupidString += Environment.NewLine;
                     }
                     
                 }
-                return true;
             }
             catch (Exception e)
             {
                 stupidString ="The file could not be read:";
                 stupidString += e.Message;
-                return false;
             }
-                        
+            stupidString += "\n";
         }
     }
 }
