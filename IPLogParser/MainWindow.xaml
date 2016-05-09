@@ -6,7 +6,11 @@
         xmlns:local="clr-namespace:IPLogParser"
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
-    <Grid>
-        
+    <Grid Cursor="{Binding stupidString, Mode=OneWay}">
+        <Grid.DataContext>
+            <local:TheLog/>
+        </Grid.DataContext>
+        <!--<ListView />-->
+        <TextBlock></TextBlock>
     </Grid>
 </Window>

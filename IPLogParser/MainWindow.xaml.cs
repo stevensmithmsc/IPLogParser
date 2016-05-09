@@ -22,7 +22,10 @@ namespace IPLogParser
     {
         public MainWindow()
         {
+            TheLog theLog = new TheLog();
+            theLog.readFromFile("C:\\Users\\steven.smith\\Source\\Repos\\IPLogParser\\IPLogParser\\Data\\inpatient_testrun_20160504_5.log");
             InitializeComponent();
+            
         }
     }
 }

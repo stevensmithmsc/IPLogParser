@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace IPLogParser
 {
-    class LogEntry
+    public class LogEntry
     {
         string Entry { get; set; }
     }
