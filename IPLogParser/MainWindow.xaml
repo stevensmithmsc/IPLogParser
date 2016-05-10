@@ -5,21 +5,26 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:IPLogParser"
         mc:Ignorable="d"
-        Title="Inpatient Log File Viewer" Height="500" Width="725">
+        Title="Inpatient Log File Viewer" Height="500" Width="725" Background="Black" Foreground="White" BorderBrush="#FF000078">
     <Window.DataContext>
         <local:TheLog/>
     </Window.DataContext>
     <Grid>
-        <StackPanel ClipToBounds="True">
-            <TextBox Text="{Binding stupidString, Mode=OneWay}" />
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
         
-            <ListView ItemsSource="{Binding LogList}" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Visible" Height="400"/>
-            <StatusBar HorizontalAlignment="Left" Height="20" VerticalAlignment="Bottom">
+            <TextBox Text="{Binding stupidString, Mode=OneWay}" Background="Black" Foreground="White" />
+        
+            <ListView ItemsSource="{Binding LogList}" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Visible" Background="Black" Foreground="White" BorderBrush="#FF000078" BorderThickness="2" Grid.Row="1"/>
+            <StatusBar HorizontalAlignment="Left" Height="20" VerticalAlignment="Bottom" Background="#FF000078" Foreground="#FFF9F9F9" Grid.Row="2">
                 <TextBlock Text="{Binding LogList.Count, Mode=OneWay}" />
                 <Separator />
                 <TextBlock Text="{Binding noErrors, Mode=OneWay}" />
             </StatusBar>
-        </StackPanel>
+        
         
 
     </Grid>

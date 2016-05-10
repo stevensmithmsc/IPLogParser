@@ -1,19 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace IPLogParser
 {
-    public class TheLog
+    public class TheLog : INotifyPropertyChanged
     {
         public ObservableCollection<LogEntry> LogList { get; private set; }
         public string stupidString { get; private set; }
-        public int noEntries { get { return LogList.Count; } }
+        public int noEntries { get { return LogList.Count-1; } }
         public int noErrors { get; private set;}
+        private bool _isLoading;
+        public bool IsLoading { get { return _isLoading; } set { _isLoading = value; NotifyPropertyChanged(); } }
 
         public TheLog()
         {
@@ -22,7 +26,7 @@ namespace IPLogParser
             LogList.Add(new LogEntry("Stupid"));
             LogList.Add(new LogEntry("Rubbish"));
             noErrors = 0;
-            this.readFromFile("C:\\Users\\steven.smith\\Source\\Repos\\IPLogParser\\IPLogParser\\Data\\inpatient_testrun_20160504.log");
+            this.readFromFile("C:\\Users\\Steve\\Documents\\GitHub\\IPLogParser\\IPLogParser\\Data\\inpatient_testrun_20160504.log");
         }
 
         public async void readFromFile(string filename)
@@ -61,6 +65,16 @@ namespace IPLogParser
                 stupidString += e.Message;
             }
             
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public void NotifyPropertyChanged([CallerMemberName]string propertyName = null)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
         }
     }
 }
