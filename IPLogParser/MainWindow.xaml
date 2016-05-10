@@ -5,15 +5,22 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:IPLogParser"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="Inpatient Log File Viewer" Height="500" Width="725">
     <Window.DataContext>
         <local:TheLog/>
     </Window.DataContext>
     <Grid>
-        <ScrollViewer>
-            <TextBox Text="{Binding stupidString, Mode=OneWay}" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True" />
-        </ScrollViewer>
+        <StackPanel ClipToBounds="True">
+            <TextBox Text="{Binding stupidString, Mode=OneWay}" />
+        
+            <ListView ItemsSource="{Binding LogList}" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Visible" Height="400"/>
+            <StatusBar HorizontalAlignment="Left" Height="20" VerticalAlignment="Bottom">
+                <TextBlock Text="{Binding LogList.Count, Mode=OneWay}" />
+                <Separator />
+                <TextBlock Text="{Binding noErrors, Mode=OneWay}" />
+            </StatusBar>
+        </StackPanel>
+        
 
-        <!--<ListView />-->
     </Grid>
 </Window>
