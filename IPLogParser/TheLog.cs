@@ -13,24 +13,27 @@ namespace IPLogParser
     public class TheLog : INotifyPropertyChanged
     {
         public ObservableCollection<LogEntry> LogList { get; private set; }
-        public string stupidString { get; private set; }
+        private string _fileString; 
+        public string fileString { get { return _fileString; } private set { _fileString = value; NotifyPropertyChanged(); } }
         public int noEntries { get { return LogList.Count-1; } }
-        public int noErrors { get; private set;}
+        public int _noErrors;
+        public int noErrors { get { return _noErrors; } private set { _noErrors = value; NotifyPropertyChanged(); } }
         private bool _isLoading;
         public bool IsLoading { get { return _isLoading; } set { _isLoading = value; NotifyPropertyChanged(); } }
 
         public TheLog()
         {
-            stupidString = "Hello";
+            fileString = "Hello";
             LogList = new ObservableCollection<LogEntry>();
             LogList.Add(new LogEntry("Stupid"));
             LogList.Add(new LogEntry("Rubbish"));
             noErrors = 0;
-            this.readFromFile("C:\\Users\\Steve\\Documents\\GitHub\\IPLogParser\\IPLogParser\\Data\\inpatient_testrun_20160504.log");
+            this.readFromFile("C:\\Users\\steven.smith\\Source\\Repos\\IPLogParser\\IPLogParser\\Data\\inpatient_testrun_20160504.log");
         }
 
         public async void readFromFile(string filename)
         {
+            IsLoading = true;
             LogList.Clear();
             noErrors = 0;
             try
@@ -54,17 +57,17 @@ namespace IPLogParser
                         }
                     }     
                 }
-                stupidString = filename;
+                fileString = filename;
                 if (currentEntry.hasError) noErrors++;
                 LogList.Add(currentEntry);
                 
             }
             catch (Exception e)
             {
-                stupidString = "The file could not be read:\n";
-                stupidString += e.Message;
+                fileString = "The file could not be read:\n";
+                fileString += e.Message;
             }
-            
+            IsLoading = false;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

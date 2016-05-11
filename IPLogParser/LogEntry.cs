@@ -36,7 +36,7 @@ namespace IPLogParser
             Entry += addNewLine ? Environment.NewLine + newString : newString;
 
             if (newString.Length > 7 && newString.Substring(0, 7) == "Counted") doneCount = true;
-            if (doneCount && newString.Contains("error")) hasError = true;
+            if (newString.ToLower().Contains("error")) hasError = true;
         }
 
         override public string  ToString()
