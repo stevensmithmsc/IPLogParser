@@ -11,23 +11,23 @@ namespace IPLogParser
 {
     public class BooltoColour : IValueConverter
     {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo language)
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            Color returnValue = Colors.Black;
+            Color returnValue = Colors.White;
             if (value is bool)
             {
-                returnValue = (bool)value ? Colors.Red : Colors.White;
+                returnValue = (bool)value ? Colors.Red : Colors.Black;
             }
             return returnValue;
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo language)
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             bool returnValue = default(bool);
             if (value is Color)
             {
                 if ((Color)value == Colors.Red) { returnValue = true; }
-                else if ((Color)value == Colors.White) { returnValue = false; }
+                else if ((Color)value == Colors.Black) { returnValue = false; }
             }
             return returnValue;
 

@@ -28,7 +28,7 @@ namespace IPLogParser
             LogList.Add(new LogEntry("Stupid"));
             LogList.Add(new LogEntry("Rubbish"));
             noErrors = 0;
-            this.readFromFile("C:\\Users\\steven.smith\\Source\\Repos\\IPLogParser\\IPLogParser\\Data\\inpatient_testrun_20160504.log");
+            this.readFromFile("C:\\Users\\Steve\\Documents\\GitHub\\IPLogParser\\IPLogParser\\Data\\inpatient_testrun_20160504.log");
         }
 
         public async void readFromFile(string filename)

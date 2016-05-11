@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="Inpatient Log File Viewer" Height="500" Width="725" Background="Black" Foreground="White" BorderBrush="#FF000078">
     <Window.Resources>
-        <local:BooltoColour x:Key="BooltoColour"/>
+        <local:BooltoColour x:Key="BooltoColourConverter"/>
     </Window.Resources>
     <Window.DataContext>
         <local:TheLog/>
@@ -20,10 +20,21 @@
         </Grid.RowDefinitions>
         
             <TextBox Text="{Binding fileString, Mode=OneWay}" Background="Black" Foreground="White" />
-        
-            <ListView ItemsSource="{Binding LogList}" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Visible" Background="Black" Foreground="White" BorderBrush="#FF000078" BorderThickness="2" Grid.Row="1"/>
-            
-            <StatusBar HorizontalAlignment="Left" Height="20" VerticalAlignment="Bottom" Background="#FF000078" Foreground="#FFF9F9F9" Grid.Row="2">
+
+        <ListView ItemsSource="{Binding LogList}" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Visible" Background="Black" Foreground="White" BorderBrush="#FF000078" BorderThickness="2" Grid.Row="1">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Border BorderBrush="#FF000078" BorderThickness="1">
+                        <Border.Background>
+                            <SolidColorBrush Color="{Binding hasError, Converter={StaticResource BooltoColourConverter}}" />
+                        </Border.Background>
+                        <TextBlock Text="{Binding Entry}" MinWidth="700" />
+                    </Border>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <StatusBar HorizontalAlignment="Left" Height="20" VerticalAlignment="Bottom" Background="#FF000078" Foreground="#FFF9F9F9" Grid.Row="2">
                 <TextBlock Text="Entries: " />
                 <TextBlock Text="{Binding LogList.Count, Mode=OneWay}" />
                 <Separator />
@@ -31,6 +42,6 @@
                 <TextBlock Text="{Binding noErrors, Mode=OneWay}" />
                 <Separator />
                 <!--<TextBlock Text="Loading..." Visibility="{Binding IsLoading, Mode=OneWay}" />--> 
-            </StatusBar>
+        </StatusBar>
     </Grid>
 </Window>

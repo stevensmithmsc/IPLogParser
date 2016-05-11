@@ -1,15 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace IPLogParser
 {
-    public class LogEntry
+    public class LogEntry : INotifyPropertyChanged
     {
         public string Entry { get; set; }
-        public bool hasError { get; private set; }  //determines if entry contains an error message
+        private bool _hasError;
+        public bool hasError { get { return _hasError; } private set { _hasError = value; NotifyPropertyChanged(); } }  //determines if entry contains an error message
         private bool doneCount;                     //determines if Counted.... line has been reached
 
         public LogEntry(string startString)
@@ -42,6 +45,16 @@ namespace IPLogParser
         override public string  ToString()
         {
             return Entry;
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public void NotifyPropertyChanged([CallerMemberName]string propertyName = null)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
         }
     }
 }
