@@ -35,7 +35,7 @@
             </ListView.ItemTemplate>
         </ListView>
 
-        <StatusBar HorizontalAlignment="Left" Height="20" VerticalAlignment="Bottom" Background="#FF000078" Foreground="#FFF9F9F9" Grid.Row="2">
+        <StatusBar Height="30" VerticalAlignment="Bottom" Background="#FF000078" Foreground="#FFF9F9F9" Grid.Row="2">
             <TextBlock Text="Entries: " />
             <TextBlock Text="{Binding noEntries, Mode=OneWay}" />
             <Separator />
@@ -43,6 +43,8 @@
             <TextBlock Text="{Binding noErrors, Mode=OneWay}" />
             <Separator />
             <TextBlock Text="Loading..." Visibility="{Binding IsLoading, Converter={StaticResource BooltoVis}, Mode=OneWay}" />
+            <Separator />
+            <Button Content ="Load Log File" Command="{Binding LoadLogFileCommand, Mode=OneWay}" />
         </StatusBar>
     </Grid>
 </Window>

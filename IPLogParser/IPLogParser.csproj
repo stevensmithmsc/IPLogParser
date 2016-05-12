@@ -57,6 +57,7 @@
     </ApplicationDefinition>
     <Compile Include="BooltoColour.cs" />
     <Compile Include="BooltoVis.cs" />
+    <Compile Include="DelegateCommand.cs" />
     <Compile Include="TheLog.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>

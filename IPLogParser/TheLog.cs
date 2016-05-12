@@ -7,6 +7,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace IPLogParser
 {
@@ -23,6 +24,7 @@ namespace IPLogParser
 
         public TheLog()
         {
+            LoadLogFileCommand = new DelegateCommand<object>(LoadLogFile);
             fileString = "Hello";
             LogList = new ObservableCollection<LogEntry>();
             LogList.Add(new LogEntry("Stupid"));
@@ -81,30 +83,33 @@ namespace IPLogParser
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
         }
+
+        public ICommand LoadLogFileCommand { get; private set; }
+
+        private void LoadLogFile(object parameter)
+        {
+            // Create OpenFileDialog 
+
+            Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
+
+            // Set filter for file extension and default file extension 
+            dlg.DefaultExt = ".log";
+            dlg.Filter = "Log Files (.log)|*.log";
+
+
+            // Display OpenFileDialog by calling ShowDialog method 
+            Nullable<bool> result = dlg.ShowDialog();
+
+            // Get the selected file name and display in a TextBox 
+            if (result == true)
+            {
+                // Open document 
+                string filename = dlg.FileName;
+                readFromFile(filename);
+            }
+        }
+
+        
     }
 }
 
-
-
-/*
- * http://www.c-sharpcorner.com/uploadfile/mahesh/openfiledialog-in-wpf/
-// Create OpenFileDialog 
-
-Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();            
-
-// Set filter for file extension and default file extension 
-dlg.DefaultExt = ".txt"; 
-dlg.Filter = "Text documents (.txt)|*.txt";  
-
-
-// Display OpenFileDialog by calling ShowDialog method 
-Nullable<bool> result = dlg.ShowDialog(); 
-
-// Get the selected file name and display in a TextBox 
-if (result == true) 
-{ 
-    // Open document 
-    string filename = dlg.FileName; 
-    FileNameTextBox.Text = filename; 
- }
-*/
