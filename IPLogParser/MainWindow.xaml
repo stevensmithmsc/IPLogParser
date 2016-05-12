@@ -7,6 +7,7 @@
         mc:Ignorable="d"
         Title="Inpatient Log File Viewer" Height="500" Width="725" Background="Black" Foreground="White" BorderBrush="#FF000078">
     <Window.Resources>
+        <local:BooltoVis x:Key="BooltoVis"/>
         <local:BooltoColour x:Key="BooltoColourConverter"/>
     </Window.Resources>
     <Window.DataContext>
@@ -35,13 +36,13 @@
         </ListView>
 
         <StatusBar HorizontalAlignment="Left" Height="20" VerticalAlignment="Bottom" Background="#FF000078" Foreground="#FFF9F9F9" Grid.Row="2">
-                <TextBlock Text="Entries: " />
-                <TextBlock Text="{Binding LogList.Count, Mode=OneWay}" />
-                <Separator />
-                <TextBlock Text="Errors: " />
-                <TextBlock Text="{Binding noErrors, Mode=OneWay}" />
-                <Separator />
-                <!--<TextBlock Text="Loading..." Visibility="{Binding IsLoading, Mode=OneWay}" />--> 
+            <TextBlock Text="Entries: " />
+            <TextBlock Text="{Binding noEntries, Mode=OneWay}" />
+            <Separator />
+            <TextBlock Text="Errors: " />
+            <TextBlock Text="{Binding noErrors, Mode=OneWay}" />
+            <Separator />
+            <TextBlock Text="Loading..." Visibility="{Binding IsLoading, Converter={StaticResource BooltoVis}, Mode=OneWay}" />
         </StatusBar>
     </Grid>
 </Window>
