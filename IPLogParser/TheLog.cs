@@ -13,7 +13,9 @@ namespace IPLogParser
 {
     public class TheLog : INotifyPropertyChanged
     {
+
         public ObservableCollection<LogEntry> LogList { get; private set; }
+        public IEnumerable <LogEntry> ErrList { get { return LogList.Where(l => l.hasError == true); } }
         private string _fileString; 
         public string fileString { get { return _fileString; } private set { _fileString = value; NotifyPropertyChanged(); } }
         public int noEntries { get { return LogList.Count-1; } }
@@ -53,6 +55,7 @@ namespace IPLogParser
                             if (currentEntry.hasError) noErrors++;
                             LogList.Add(currentEntry);
                             NotifyPropertyChanged("noEntries");
+                            NotifyPropertyChanged("ErrList");
                             currentEntry = new LogEntry(line);
                         } else
                         {

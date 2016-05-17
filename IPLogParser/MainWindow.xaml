@@ -22,14 +22,14 @@
         
             <TextBox Text="{Binding fileString, Mode=OneWay}" Background="Black" Foreground="White" />
 
-        <ListView ItemsSource="{Binding LogList}" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Visible" Background="Black" Foreground="White" BorderBrush="#FF000078" BorderThickness="2" Grid.Row="1">
+        <ListView ItemsSource="{Binding ErrList}" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Visible" Background="Black" Foreground="White" BorderBrush="#FF000078" BorderThickness="2" Grid.Row="1">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Border BorderBrush="#FF000078" BorderThickness="1">
                         <Border.Background>
                             <SolidColorBrush Color="{Binding hasError, Converter={StaticResource BooltoColourConverter}}" />
                         </Border.Background>
-                        <TextBlock Text="{Binding Entry}" MinWidth="700" />
+                        <TextBlock Text="{Binding Entry}" MinWidth="670" />
                     </Border>
                 </DataTemplate>
             </ListView.ItemTemplate>

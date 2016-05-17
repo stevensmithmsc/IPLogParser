@@ -33,6 +33,8 @@ namespace IPLogParser
             if (doneCount) addNewLine = true;
             if (Entry == "") addNewLine = false;
 
+            newString = newString.TrimEnd(' ');
+
             Entry += addNewLine ? Environment.NewLine + newString : newString;
 
             if (newString.Length > 7 && newString.Substring(0, 7) == "Counted") doneCount = true;
