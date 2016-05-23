@@ -13,9 +13,10 @@ namespace IPLogParser
 {
     public class TheLog : INotifyPropertyChanged
     {
-
+        private bool _errorsOnly;
+        public bool errorsOnly { get { return _errorsOnly; } set { _errorsOnly = value;  NotifyPropertyChanged(); NotifyPropertyChanged("ErrList"); } }
         public ObservableCollection<LogEntry> LogList { get; private set; }
-        public IEnumerable <LogEntry> ErrList { get { return LogList.Where(l => l.hasError == true); } }
+        public IEnumerable <LogEntry> ErrList { get { return errorsOnly?LogList.Where(l => l.hasError == true):LogList; } }
         private string _fileString; 
         public string fileString { get { return _fileString; } private set { _fileString = value; NotifyPropertyChanged(); } }
         public int noEntries { get { return LogList.Count-1; } }

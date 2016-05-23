@@ -45,6 +45,9 @@
             <TextBlock Text="Loading..." Visibility="{Binding IsLoading, Converter={StaticResource BooltoVis}, Mode=OneWay}" />
             <Separator />
             <Button Content ="Load Log File" Command="{Binding LoadLogFileCommand, Mode=OneWay}" />
+            <Separator />
+            <CheckBox IsChecked="{Binding errorsOnly}" />
+            <TextBlock Text="Only Show Error Records" />
         </StatusBar>
     </Grid>
 </Window>
