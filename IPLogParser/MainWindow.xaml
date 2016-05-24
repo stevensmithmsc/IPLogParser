@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:IPLogParser"
         mc:Ignorable="d"
-        Title="Inpatient Log File Viewer" Height="500" Width="725" Background="Black" Foreground="White" BorderBrush="#FF000078">
+        Title="Inpatient Log File Viewer" Height="500" Width="725" Background="Black" Foreground="White" BorderBrush="#FF000078" Icon="IPLogParser.ico">
     <Window.Resources>
         <local:BooltoVis x:Key="BooltoVis"/>
         <local:BooltoColour x:Key="BooltoColourConverter"/>
